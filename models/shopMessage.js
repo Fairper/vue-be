@@ -19,7 +19,7 @@ const shopMessagerModel = mongoose.model('shopMessage',shopMessageSchema, 'shopM
 // 添加菜系
 const addCookStyle = (data) => {
     return shopMessagerModel
-        .updateMany({_id: '5c86167fe753471418f58553'}, { $push: { cookingStyleArr: data } })
+        .updateMany({ $push: { cookingStyleArr: data } })
         .then((result) => {
             return result
         })
@@ -41,7 +41,7 @@ const findCookStyle = () => {
 // 删除某一个菜系
 const delCookStyle = (data) => {
     return shopMessagerModel
-        .updateMany({_id: '5c86167fe753471418f58553'}, {$pull:{'cookingStyleArr': data}})
+        .updateMany({$pull:{'cookingStyleArr': data}})
         .then((result) => {
             return result
         })
@@ -51,15 +51,13 @@ const delCookStyle = (data) => {
 }
 // 编辑某一个菜系，更新
 const editCookStyle = (data) => {
-    console.log(data, 'dddddd')
+    let arr = `cookingStyleArr.${data.index}.name`
     return shopMessagerModel
-        .updateMany({_id: '5c86167fe753471418f58553'}, {$set:{'cookingStyleArr.$.name': data.nameUpdate}}, false, true)
+        .updateMany({$set:{[arr]: data.nameUpdate}}, false)
         .then((result) => {
-            console.log('resulttttttttttttttt', result)
             return result
         })
         .catch(err => {
-            console.log('errrrrrrrrr', err)
             return false
         })
 }
