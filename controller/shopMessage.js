@@ -5,7 +5,7 @@ const getShopMessage =async (req, res, next) => {
     let result = await shopMessageModel.findShopMessage()
     console.log(result)
 } 
-// 保存数据
+// 添加一个菜系
 const addCookStyle = async(req, res, next) => {
     res.header('Content-Type', 'application/json; charset=utf-8')
     let result = await (shopMessageModel.addCookStyle({
@@ -28,6 +28,7 @@ const addCookStyle = async(req, res, next) => {
         })
     }
 }
+// 找到一个菜系
 const findCookStyle = async(req, res, next) => {
     // res.header('Content-Type', 'application/json; charset=utf-8')
     let data = await (shopMessageModel.findCookStyle())
@@ -64,9 +65,34 @@ const delCookStyle = async(req, res, next) => {
         })
     }
 }
+// 修改一个菜系
+const editCookStyle = async(req, res, next) => {
+    res.header('Content-Type', 'application/json; charset=utf-8')
+    console.log('reqqqq', req.body)
+    let data = await (shopMessageModel.editCookStyle(req.body))
+        // 这是给前端的反馈信息(是否保存成功)
+    console.log('dataaaa', data)
+    if (!!data) {
+        res.render('shopMessage', {
+            ret: true,
+            data: JSON.stringify({
+                msg: '菜系修改成功'
+            })
+        })
+    } else {
+        res.render('shopMessage', {
+            ret: false,
+            data: JSON.stringify({
+                msg: '菜系修改失败'
+            })
+        })
+    }
+}
 module.exports = {
     getShopMessage,
     findCookStyle,
     addCookStyle,
-    delCookStyle
+    delCookStyle,
+    editCookStyle
+
 }

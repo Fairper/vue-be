@@ -10,4 +10,5 @@ router.get('/getShopMessage', shopMessageController.getShopMessage);
 router.post('/addCookstyle', shopMessageController.addCookStyle);
 router.get('/findCookStyle', shopMessageController.findCookStyle);
 router.post('/delCookStyle', shopMessageController.delCookStyle);
+router.post('/editCookStyle', shopMessageController.editCookStyle);
 module.exports = router;

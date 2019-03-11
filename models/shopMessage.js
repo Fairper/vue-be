@@ -19,7 +19,7 @@ const shopMessagerModel = mongoose.model('shopMessage',shopMessageSchema, 'shopM
 // 添加菜系
 const addCookStyle = (data) => {
     return shopMessagerModel
-        .updateMany({_id: '5c8537fc2db1bbd302a61747'}, { $push: { cookingStyleArr: data } })
+        .updateMany({_id: '5c86167fe753471418f58553'}, { $push: { cookingStyleArr: data } })
         .then((result) => {
             return result
         })
@@ -30,7 +30,7 @@ const addCookStyle = (data) => {
 // 查找所有的菜系
 const findCookStyle = () => {
     return shopMessagerModel
-        .find({_id: '5c8537fc2db1bbd302a61747'})
+        .find({_id: '5c86167fe753471418f58553'})
         .then((result) => {
             return result[0].cookingStyleArr
         })
@@ -41,12 +41,25 @@ const findCookStyle = () => {
 // 删除某一个菜系
 const delCookStyle = (data) => {
     return shopMessagerModel
-        .update({_id: '5c8537fc2db1bbd302a61747'}, {$pull:{'cookingStyleArr': data}})
+        .updateMany({_id: '5c86167fe753471418f58553'}, {$pull:{'cookingStyleArr': data}})
         .then((result) => {
-            console.log('resuklrswkd', result)
             return result
         })
         .catch(err => {
+            return false
+        })
+}
+// 编辑某一个菜系，更新
+const editCookStyle = (data) => {
+    console.log(data, 'dddddd')
+    return shopMessagerModel
+        .updateMany({_id: '5c86167fe753471418f58553'}, {$set:{'cookingStyleArr.$.name': data.nameUpdate}}, false, true)
+        .then((result) => {
+            console.log('resulttttttttttttttt', result)
+            return result
+        })
+        .catch(err => {
+            console.log('errrrrrrrrr', err)
             return false
         })
 }
@@ -66,5 +79,6 @@ module.exports={
     findShopMessage,
     findCookStyle,
     addCookStyle,
-    delCookStyle
+    delCookStyle,
+    editCookStyle
 }
