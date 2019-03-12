@@ -30,7 +30,7 @@ const addCookStyle = (data) => {
 // 查找所有的菜系
 const findCookStyle = () => {
     return shopMessagerModel
-        .find({_id: '5c86167fe753471418f58553'})
+        .find({})
         .then((result) => {
             return result[0].cookingStyleArr
         })
