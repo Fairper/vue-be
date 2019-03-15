@@ -50,7 +50,6 @@ const delCook = (data) => {
 }
 // 编辑某一个菜品
 const editCook = (data) => {
-    console.log('dataaaaaaa', data)
     let id = mongoose.Types.ObjectId(data._id); 
     return cookMessagerModel
         .updateOne({ '_id' : id}, data)

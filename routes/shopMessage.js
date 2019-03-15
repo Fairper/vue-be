@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/getShopMessage', shopMessageController.getShopMessage);
+router.post('/updateShopMessage', shopMessageController.updateShopMessage);
 router.post('/addCookstyle', shopMessageController.addCookStyle);
 router.get('/findCookStyle', shopMessageController.findCookStyle);
 router.post('/delCookStyle', shopMessageController.delCookStyle);
