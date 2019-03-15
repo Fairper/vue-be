@@ -6,16 +6,33 @@ const shopMessageSchema = new mongoose.Schema({
     userId: String,
     userName: String,
     name: String,
-    restaurantName: String,
-    businessTime: String,
-    cookingStyle: String,
+    restrantName: String,
+    startTime: String,
+    endTime: String,
+    type: String,
+    area: String,
     cookingStyleArr: Array,
     activity: Array,
-    deliveryScope: Array,
-    deliveryMoney: Number
+    deliveryMoney: Number,
+    deliveryScope: String
 }); 
 // users是集合的名字，userSchema是集合的结构
 const shopMessagerModel = mongoose.model('shopMessage',shopMessageSchema, 'shopMessage')
+// 更新店铺信息
+const updateShopMessage = (data) => {
+    console.log('dataaaaaaa', data)
+    let id = mongoose.Types.ObjectId(data._id); 
+        return shopMessagerModel
+        .updateOne({ '_id' : id}, data)
+        .then((result) => {     
+            return result
+        })
+        // catch表示find操作出错了，空数 据并不代表出错
+        .catch((err) => {
+            return false
+        })
+}
+
 // 添加菜系
 const addCookStyle = (data) => {
     return shopMessagerModel
@@ -32,7 +49,7 @@ const findCookStyle = () => {
     return shopMessagerModel
         .find({})
         .then((result) => {
-            return result[0].cookingStyleArr
+            return result[0]
         })
         .catch(err => {
             return false
@@ -61,20 +78,9 @@ const editCookStyle = (data) => {
             return false
         })
 }
-const findShopMessage = () => {
-        return shopMessagerModel
-        .find()
-        .then((result) => {     
-            return result
-        })
-        // catch表示find操作出错了，空数 据并不代表出错
-        .catch((err) => {
-            return false
-        })
-}
 
 module.exports={
-    findShopMessage,
+    updateShopMessage,
     findCookStyle,
     addCookStyle,
     delCookStyle,

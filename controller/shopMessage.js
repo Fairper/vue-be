@@ -1,9 +1,27 @@
 const shopMessageModel = require('../models/shopMessage')
-const getShopMessage =async (req, res, next) => {
+
+// 更新店铺信息
+const updateShopMessage =async (req, res, next) => {
     res.header('Content-Type', 'application/json; charset=utf-8')
-    let userId = req.body.userId
-    let result = await shopMessageModel.findShopMessage()
+    console.log('reqqqq', req.body)
+    let result = await shopMessageModel.updateShopMessage(req.body)
     console.log(result)
+    // 这是给前端的反馈信息(是否保存成功)
+    if (!!result) {
+        res.render('shopMessage', {
+            ret: true,
+            data: JSON.stringify({
+                msg: '数据保存成功'
+            })
+        })
+    } else {
+        res.render('shopMessage', {
+            ret: false,
+            data: JSON.stringify({
+                msg: '数据保存失败'
+            })
+        })
+    }
 } 
 // 添加一个菜系
 const addCookStyle = async(req, res, next) => {
@@ -89,7 +107,7 @@ const editCookStyle = async(req, res, next) => {
     }
 }
 module.exports = {
-    getShopMessage,
+    updateShopMessage,
     findCookStyle,
     addCookStyle,
     delCookStyle,
