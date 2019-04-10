@@ -3,10 +3,11 @@ const signin = async(req, res, next) => {
     res.header('Content-Type', 'application/json; charset=utf-8')
     let { username, password } = req.body;
     // let username='admin'
+    
     let result = await signModel.find({
         username,
     })
-    console.log(result)
+    console.log(result, 'rresult')
     let id = result._id
     if (!!result) {
         let isCorrect = (password === result.password)

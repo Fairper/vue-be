@@ -5,7 +5,7 @@ const addCook = async(req, res, next) => {
     let result = await (cookMessageModel.addCook({
             ...req.body,
         }))
-    console.log('resultControllllll', result)
+    console.log('resultControllllll', req.body)
         // 这是给前端的反馈信息(是否保存成功)
     if (!!result) {
         res.render('cookMessage', {

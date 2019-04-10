@@ -3,7 +3,8 @@ const mongoose = require('../utils/database')
 //创建scheme 创建集合 
 const shopMessageSchema = new mongoose.Schema({
     items: Array,
-    userId: String,
+    id: Number,
+    sn: Number,
     userName: String,
     name: String,
     restrantName: String,
@@ -14,6 +15,7 @@ const shopMessageSchema = new mongoose.Schema({
     cookingStyleArr: Array,
     activity: Array,
     deliveryMoney: Number,
+    additionalMoney: Number,
     deliveryScope: String
 }); 
 // users是集合的名字，userSchema是集合的结构
@@ -44,17 +46,29 @@ const addCookStyle = (data) => {
             console.log('xxxxx', err)
         })
 }
+// 添加新店铺
+const addShop= (data) => {
+    return new shopMessagerModel(data)
+        .save()
+        .then((result) => {
+            console.log('result', result)
+            return result
+        })
+        .catch(err => {
+            console.log('xxxxx', err)
+        })
+}
 // 查找所有的菜系
 const findCookStyle = () => {
     return shopMessagerModel
         .find({})
         .then((result) => {
-            return result[0]
+            return result
         })
         .catch(err => {
             return false
         })
-}
+} 
 // 删除某一个菜系
 const delCookStyle = (data) => {
     return shopMessagerModel
@@ -84,5 +98,6 @@ module.exports={
     findCookStyle,
     addCookStyle,
     delCookStyle,
-    editCookStyle
+    editCookStyle,
+    addShop
 }

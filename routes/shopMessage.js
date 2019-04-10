@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/updateShopMessage', shopMessageController.updateShopMessage);
 router.post('/addCookstyle', shopMessageController.addCookStyle);
+router.post('/addShop', shopMessageController.addShop);
 router.get('/findCookStyle', shopMessageController.findCookStyle);
 router.post('/delCookStyle', shopMessageController.delCookStyle);
 router.post('/editCookStyle', shopMessageController.editCookStyle);

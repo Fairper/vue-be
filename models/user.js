@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     password: String
 }); 
 // users是集合的名字，userSchema是集合的结构
-const userModel = mongoose.model('users',userSchema)
+const userModel = mongoose.model('user',userSchema, 'user')
 const find = (condition) => {
         return userModel
         .findOne(condition)

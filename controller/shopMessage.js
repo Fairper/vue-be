@@ -46,6 +46,29 @@ const addCookStyle = async(req, res, next) => {
         })
     }
 }
+// 添加一个菜系
+const addShop = async(req, res, next) => {
+    res.header('Content-Type', 'application/json; charset=utf-8')
+    let result = await (shopMessageModel.addShop({
+            ...req.body,
+        }))
+        // 这是给前端的反馈信息(是否保存成功)
+    if (!!result) {
+        res.render('shopMessage', {
+            ret: true,
+            data: JSON.stringify({
+                msg: '数据保存成功'
+            })
+        })
+    } else {
+        res.render('shopMessage', {
+            ret: false,
+            data: JSON.stringify({
+                msg: '数据保存失败'
+            })
+        })
+    }
+}
 // 找到一个菜系
 const findCookStyle = async(req, res, next) => {
     // res.header('Content-Type', 'application/json; charset=utf-8')
@@ -111,6 +134,6 @@ module.exports = {
     findCookStyle,
     addCookStyle,
     delCookStyle,
-    editCookStyle
-
+    editCookStyle,
+    addShop
 }
