@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/addCook', fileuploadMiddleware.fileupload, cookMessageController.addCook);
 router.get('/findCook', cookMessageController.findCook);
+router.post('/findOneShop', cookMessageController.findOneShop);
 router.post('/delCook', cookMessageController.delCook);
 router.post('/editCook', fileuploadMiddleware.fileupload, cookMessageController.editCook);
 module.exports = router;

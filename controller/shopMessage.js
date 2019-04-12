@@ -69,7 +69,7 @@ const addShop = async(req, res, next) => {
         })
     }
 }
-// 找到一个菜系
+// 找到所有菜系
 const findCookStyle = async(req, res, next) => {
     // res.header('Content-Type', 'application/json; charset=utf-8')
     let data = await (shopMessageModel.findCookStyle())
@@ -85,6 +85,7 @@ const findCookStyle = async(req, res, next) => {
         })
     }
 }
+
 // 删除一个菜系
 const delCookStyle = async(req, res, next) => {
     res.header('Content-Type', 'application/json; charset=utf-8')

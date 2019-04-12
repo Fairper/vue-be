@@ -13,10 +13,10 @@ const cookMessageSchema = new mongoose.Schema({
     icon: String
 }); 
 // cookMessage是集合的名字，cookMessageSchema是集合的结构
-const cookMessagerModel = mongoose.model('cookMessage',cookMessageSchema, 'cookMessage')
+const cookMessageModel = mongoose.model('cookMessage',cookMessageSchema, 'cookMessage')
 // 添加菜品
 const addCook = (data) => {
-    return new cookMessagerModel(data)
+    return new cookMessageModel(data)
         .save()
         .then((result) => {
             return result
@@ -27,7 +27,7 @@ const addCook = (data) => {
 }
 // 查找菜品
 const findCook = () => {
-    return cookMessagerModel
+    return cookMessageModel
         .find({})
         .then((result) => {
             return result
@@ -36,10 +36,21 @@ const findCook = () => {
             return err
         })
 }
+// 查找某一个店铺的菜
+const findOneShop = (condition) => {
+    return cookMessageModel
+        .find(condition)
+        .then((result) => {
+            return result
+        })
+        .catch(err => {
+            return false
+        })
+} 
 // 删除某一个菜品
 const delCook = (data) => {
     let id = mongoose.Types.ObjectId(data.id); 
-    return cookMessagerModel
+    return cookMessageModel
         .findOneAndDelete({ '_id' : id})
         .then((result) => {
             return result
@@ -51,7 +62,7 @@ const delCook = (data) => {
 // 编辑某一个菜品
 const editCook = (data) => {
     let id = mongoose.Types.ObjectId(data._id); 
-    return cookMessagerModel
+    return cookMessageModel
         .updateOne({ '_id' : id}, data)
         .then((result) => {
             return result
@@ -64,5 +75,6 @@ module.exports={
     addCook,
     findCook,
     delCook,
-    editCook
+    editCook,
+    findOneShop
 }
