@@ -7,5 +7,5 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/sign', signController.signin);
-
+router.post('/signup', signController.signup);
 module.exports = router;

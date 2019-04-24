@@ -2,10 +2,11 @@ const cookMessageModel = require('../models/cookMessage')
 // 添加一个菜系
 const addCook = async(req, res, next) => {
     res.header('Content-Type', 'application/json; charset=utf-8')
+    // console.log('resultControllllll', req.body)
     let result = await (cookMessageModel.addCook({
             ...req.body,
         }))
-    console.log('resultControllllll', req.body)
+    // console.log('resultControllllll', result)
         // 这是给前端的反馈信息(是否保存成功)
     if (!!result) {
         res.render('cookMessage', {

@@ -14,7 +14,17 @@ const find = (condition) => {
             return result
         })
 }
-
+const signup = (data) => {
+    // 只有在new时可以写成方法
+    return new userModel(data)
+        // 注册是保存
+        .save()
+        .then((result) => {
+            console.log('result', result)
+            return result
+        })
+}
 module.exports={
-    find
+    find,
+    signup
 }

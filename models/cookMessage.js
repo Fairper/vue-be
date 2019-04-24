@@ -14,17 +14,35 @@ const cookMessageSchema = new mongoose.Schema({
 }); 
 // cookMessage是集合的名字，cookMessageSchema是集合的结构
 const cookMessageModel = mongoose.model('cookMessage',cookMessageSchema, 'cookMessage')
-// 添加菜品
+// 添加菜
 const addCook = (data) => {
-    return new cookMessageModel(data)
-        .save()
+    console.log('dataaaa-----------', data.id)
+    let id = mongoose.Types.ObjectId('5cb34c1a391d9b1f1027f009'); 
+    let obj = JSON.parse(JSON.stringify(data))
+    delete obj.id
+    return cookMessageModel
+        .updateMany({_id: id}, { $push: { cookList: 'data' } })
         .then((result) => {
+            console.log('resuleeee', result)
             return result
         })
         .catch(err => {
+            // console.log('errr', err)
             return err
         })
 }
+// .updateMany({ $push: { cookingStyleArr: data } })
+// db.getCollection('cookMessage').find({'_id': ObjectId("5cb1fc82e524dcc9d9f55fa3")}).updateMany({ $push: { cookList: {"name":"ssss"} } })
+// const addCook = (data) => {
+//     return new cookMessageModel(data)
+//         .save()
+//         .then((result) => {
+//             return result
+//         })
+//         .catch(err => {
+//             return err
+//         })
+// }
 // 查找菜品
 const findCook = () => {
     return cookMessageModel
